@@ -32,8 +32,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,14 +57,96 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\AuthorForms\AddAuthor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\AuthorForms\AddAuthor.Designer.cs">
+      <DependentUpon>AddAuthor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AuthorForms\EditAuthor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AuthorForms\EditAuthor.Designer.cs">
+      <DependentUpon>EditAuthor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BookForms\AddBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BookForms\AddBook.Designer.cs">
+      <DependentUpon>AddBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BookForms\EditBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BookForms\EditBook.Designer.cs">
+      <DependentUpon>EditBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ReaderForms\AddReader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReaderForms\AddReader.Designer.cs">
+      <DependentUpon>AddReader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ReaderForms\EditReader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReaderForms\EditReader.Designer.cs">
+      <DependentUpon>EditReader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Serieses\AddSeries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Serieses\AddSeries.Designer.cs">
+      <DependentUpon>AddSeries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Serieses\EditSeries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Serieses\EditSeries.Designer.cs">
+      <DependentUpon>EditSeries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Authors.cs" />
+    <Compile Include="Models\Books.cs" />
+    <Compile Include="Models\Checks.cs" />
+    <Compile Include="Models\LibraryDbContext.cs" />
+    <Compile Include="Models\Readers.cs" />
+    <Compile Include="Models\Serieses.cs" />
+    <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\AuthorForms\AddAuthor.resx">
+      <DependentUpon>AddAuthor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AuthorForms\EditAuthor.resx">
+      <DependentUpon>EditAuthor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BookForms\AddBook.resx">
+      <DependentUpon>AddBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BookForms\EditBook.resx">
+      <DependentUpon>EditBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReaderForms\AddReader.resx">
+      <DependentUpon>AddReader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReaderForms\EditReader.resx">
+      <DependentUpon>EditReader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Serieses\AddSeries.resx">
+      <DependentUpon>AddSeries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Serieses\EditSeries.resx">
+      <DependentUpon>EditSeries.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,6 +156,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -74,6 +169,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Forms\CheckForms\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

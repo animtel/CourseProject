@@ -8,13 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CourseProject
+namespace CourseProject.Forms.Serieses
 {
-    public partial class Form1 : Form
+    public partial class AddSeries : Form
     {
-        public Form1()
+        public AddSeries()
         {
             InitializeComponent();
         }
+
+       
     }
 }
