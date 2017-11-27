@@ -86,7 +86,6 @@
             this.TabBooks.TabIndex = 0;
             this.TabBooks.Text = "Books";
             this.TabBooks.UseVisualStyleBackColor = true;
-            this.TabBooks.Click += new System.EventHandler(this.TabBooks_Click);
             // 
             // ButEditBook
             // 
@@ -106,6 +105,7 @@
             this.ButDeleteBook.TabIndex = 2;
             this.ButDeleteBook.Text = "Delete Book";
             this.ButDeleteBook.UseVisualStyleBackColor = true;
+            this.ButDeleteBook.Click += new System.EventHandler(this.ButDeleteBook_Click);
             // 
             // ButAddBook
             // 
@@ -165,6 +165,7 @@
             this.ButAddAuthor.TabIndex = 5;
             this.ButAddAuthor.Text = "Add Author";
             this.ButAddAuthor.UseVisualStyleBackColor = true;
+            this.ButAddAuthor.Click += new System.EventHandler(this.ButAddAuthor_Click);
             // 
             // dataGridView2
             // 

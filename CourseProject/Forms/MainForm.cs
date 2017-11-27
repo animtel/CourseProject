@@ -56,11 +56,6 @@ namespace CourseProject
             }
         }
 
-        private void TabBooks_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ButEditBook_Click(object sender, EventArgs e)
         {
             int idOfBook = Int32.Parse(DataGrid.CurrentRow.Cells[0].Value.ToString());
@@ -90,6 +85,35 @@ namespace CourseProject
                     }
                     
                     _db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void ButDeleteBook_Click(object sender, EventArgs e)
+        {
+            int idOfBook = Int32.Parse(DataGrid.CurrentRow.Cells[0].Value.ToString());
+            //TODO DELETING
+        }
+
+        private void ButAddAuthor_Click(object sender, EventArgs e)
+        {
+            AddAuthor _authorForm = new AddAuthor(this);
+            _authorForm.ShowDialog();
+            if (_authorForm.flag)
+            {
+                try
+                {
+                    _db.Authprs.Add(new Authors
+                    {
+                        FIO = _authorForm.FIO,
+                        Year = Int32.Parse(_authorForm.YearBorn)
+                    });
+                    _db.SaveChanges();
+
                 }
                 catch (Exception ex)
                 {

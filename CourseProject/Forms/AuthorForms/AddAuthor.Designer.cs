@@ -76,6 +76,7 @@
             this.ButAddAuthor.TabIndex = 4;
             this.ButAddAuthor.Text = "Add";
             this.ButAddAuthor.UseVisualStyleBackColor = true;
+            this.ButAddAuthor.Click += new System.EventHandler(this.ButAddAuthor_Click);
             // 
             // ButCancelAuhtor
             // 
