@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.TBName = new System.Windows.Forms.TextBox();
-            this.TBFirstName = new System.Windows.Forms.TextBox();
-            this.TBLastName = new System.Windows.Forms.TextBox();
-            this.TBAuthor = new System.Windows.Forms.TextBox();
             this.LableNameSer = new System.Windows.Forms.Label();
             this.LabelFirstBook = new System.Windows.Forms.Label();
             this.LabelLastName = new System.Windows.Forms.Label();
             this.LabelAuthorSeries = new System.Windows.Forms.Label();
             this.ButAddSeries = new System.Windows.Forms.Button();
             this.ButCancel = new System.Windows.Forms.Button();
+            this.CBFirstName = new System.Windows.Forms.ComboBox();
+            this.CBLastName = new System.Windows.Forms.ComboBox();
+            this.CBAuthor = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // TBName
@@ -46,27 +46,6 @@
             this.TBName.Name = "TBName";
             this.TBName.Size = new System.Drawing.Size(100, 20);
             this.TBName.TabIndex = 0;
-            // 
-            // TBFirstName
-            // 
-            this.TBFirstName.Location = new System.Drawing.Point(159, 85);
-            this.TBFirstName.Name = "TBFirstName";
-            this.TBFirstName.Size = new System.Drawing.Size(100, 20);
-            this.TBFirstName.TabIndex = 1;
-            // 
-            // TBLastName
-            // 
-            this.TBLastName.Location = new System.Drawing.Point(159, 134);
-            this.TBLastName.Name = "TBLastName";
-            this.TBLastName.Size = new System.Drawing.Size(100, 20);
-            this.TBLastName.TabIndex = 2;
-            // 
-            // TBAuthor
-            // 
-            this.TBAuthor.Location = new System.Drawing.Point(159, 184);
-            this.TBAuthor.Name = "TBAuthor";
-            this.TBAuthor.Size = new System.Drawing.Size(100, 20);
-            this.TBAuthor.TabIndex = 3;
             // 
             // LableNameSer
             // 
@@ -122,20 +101,47 @@
             this.ButCancel.Text = "Cancel";
             this.ButCancel.UseVisualStyleBackColor = true;
             // 
+            // CBFirstName
+            // 
+            this.CBFirstName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBFirstName.FormattingEnabled = true;
+            this.CBFirstName.Location = new System.Drawing.Point(159, 91);
+            this.CBFirstName.Name = "CBFirstName";
+            this.CBFirstName.Size = new System.Drawing.Size(121, 21);
+            this.CBFirstName.TabIndex = 10;
+            // 
+            // CBLastName
+            // 
+            this.CBLastName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBLastName.FormattingEnabled = true;
+            this.CBLastName.Location = new System.Drawing.Point(159, 140);
+            this.CBLastName.Name = "CBLastName";
+            this.CBLastName.Size = new System.Drawing.Size(121, 21);
+            this.CBLastName.TabIndex = 11;
+            // 
+            // CBAuthor
+            // 
+            this.CBAuthor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBAuthor.FormattingEnabled = true;
+            this.CBAuthor.Location = new System.Drawing.Point(159, 190);
+            this.CBAuthor.Name = "CBAuthor";
+            this.CBAuthor.Size = new System.Drawing.Size(121, 21);
+            this.CBAuthor.TabIndex = 12;
+            // 
             // AddSeries
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.CBAuthor);
+            this.Controls.Add(this.CBLastName);
+            this.Controls.Add(this.CBFirstName);
             this.Controls.Add(this.ButCancel);
             this.Controls.Add(this.ButAddSeries);
             this.Controls.Add(this.LabelAuthorSeries);
             this.Controls.Add(this.LabelLastName);
             this.Controls.Add(this.LabelFirstBook);
             this.Controls.Add(this.LableNameSer);
-            this.Controls.Add(this.TBAuthor);
-            this.Controls.Add(this.TBLastName);
-            this.Controls.Add(this.TBFirstName);
             this.Controls.Add(this.TBName);
             this.Name = "AddSeries";
             this.Text = "AddSeries";
@@ -147,14 +153,14 @@
         #endregion
 
         private System.Windows.Forms.TextBox TBName;
-        private System.Windows.Forms.TextBox TBFirstName;
-        private System.Windows.Forms.TextBox TBLastName;
-        private System.Windows.Forms.TextBox TBAuthor;
         private System.Windows.Forms.Label LableNameSer;
         private System.Windows.Forms.Label LabelFirstBook;
         private System.Windows.Forms.Label LabelLastName;
         private System.Windows.Forms.Label LabelAuthorSeries;
         private System.Windows.Forms.Button ButAddSeries;
         private System.Windows.Forms.Button ButCancel;
+        private System.Windows.Forms.ComboBox CBFirstName;
+        private System.Windows.Forms.ComboBox CBLastName;
+        private System.Windows.Forms.ComboBox CBAuthor;
     }
 }

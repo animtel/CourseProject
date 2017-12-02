@@ -37,7 +37,7 @@ namespace CourseProject.Forms.BookForms
         private List<string> GetAuthors()
         {
             List<string> authors = new List<string>();
-            foreach (var item in _mainForm._db.Authprs)
+            foreach (var item in _mainForm._db.Authors)
             {
                 authors.Add(item.Id + " " + item.FIO);
             }

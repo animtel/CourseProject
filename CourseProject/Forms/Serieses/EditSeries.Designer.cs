@@ -57,6 +57,7 @@
             this.ButAddSeries.TabIndex = 18;
             this.ButAddSeries.Text = "Enter";
             this.ButAddSeries.UseVisualStyleBackColor = true;
+            this.ButAddSeries.Click += new System.EventHandler(this.ButAddSeries_Click);
             // 
             // LabelAuthorSeries
             // 

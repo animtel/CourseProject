@@ -38,26 +38,33 @@
             this.ButEditAuthor = new System.Windows.Forms.Button();
             this.ButDeleteAuthor = new System.Windows.Forms.Button();
             this.ButAddAuthor = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridAuthors = new System.Windows.Forms.DataGridView();
             this.TabReaders = new System.Windows.Forms.TabPage();
             this.ButEditReader = new System.Windows.Forms.Button();
             this.ButDeleteReader = new System.Windows.Forms.Button();
             this.ButAddReader = new System.Windows.Forms.Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.dataGridReaders = new System.Windows.Forms.DataGridView();
             this.TabChecks = new System.Windows.Forms.TabPage();
             this.ButEditCheck = new System.Windows.Forms.Button();
             this.ButDelteCheck = new System.Windows.Forms.Button();
             this.ButAddCheck = new System.Windows.Forms.Button();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.dataGridChecks = new System.Windows.Forms.DataGridView();
+            this.Series = new System.Windows.Forms.TabPage();
+            this.ButEditSeries = new System.Windows.Forms.Button();
+            this.ButDeleteSeries = new System.Windows.Forms.Button();
+            this.ButAddSeries = new System.Windows.Forms.Button();
+            this.dataGridSerieses = new System.Windows.Forms.DataGridView();
             this.Library.SuspendLayout();
             this.TabBooks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
             this.TabAuthors.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAuthors)).BeginInit();
             this.TabReaders.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridReaders)).BeginInit();
             this.TabChecks.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridChecks)).BeginInit();
+            this.Series.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridSerieses)).BeginInit();
             this.SuspendLayout();
             // 
             // Library
@@ -67,6 +74,7 @@
             this.Library.Controls.Add(this.TabAuthors);
             this.Library.Controls.Add(this.TabReaders);
             this.Library.Controls.Add(this.TabChecks);
+            this.Library.Controls.Add(this.Series);
             this.Library.Location = new System.Drawing.Point(0, -1);
             this.Library.Name = "Library";
             this.Library.SelectedIndex = 0;
@@ -86,7 +94,6 @@
             this.TabBooks.TabIndex = 0;
             this.TabBooks.Text = "Books";
             this.TabBooks.UseVisualStyleBackColor = true;
-            this.TabBooks.Click += new System.EventHandler(this.TabBooks_Click);
             // 
             // ButEditBook
             // 
@@ -106,6 +113,7 @@
             this.ButDeleteBook.TabIndex = 2;
             this.ButDeleteBook.Text = "Delete Book";
             this.ButDeleteBook.UseVisualStyleBackColor = true;
+            this.ButDeleteBook.Click += new System.EventHandler(this.ButDeleteBook_Click);
             // 
             // ButAddBook
             // 
@@ -130,13 +138,13 @@
             this.TabAuthors.Controls.Add(this.ButEditAuthor);
             this.TabAuthors.Controls.Add(this.ButDeleteAuthor);
             this.TabAuthors.Controls.Add(this.ButAddAuthor);
-            this.TabAuthors.Controls.Add(this.dataGridView2);
+            this.TabAuthors.Controls.Add(this.dataGridAuthors);
             this.TabAuthors.Location = new System.Drawing.Point(4, 22);
             this.TabAuthors.Name = "TabAuthors";
             this.TabAuthors.Padding = new System.Windows.Forms.Padding(3);
             this.TabAuthors.Size = new System.Drawing.Size(925, 533);
             this.TabAuthors.TabIndex = 1;
-            this.TabAuthors.Text = "Authors";
+            this.TabAuthors.Text = "Books";
             this.TabAuthors.UseVisualStyleBackColor = true;
             // 
             // ButEditAuthor
@@ -147,6 +155,7 @@
             this.ButEditAuthor.TabIndex = 7;
             this.ButEditAuthor.Text = "Edit Author";
             this.ButEditAuthor.UseVisualStyleBackColor = true;
+            this.ButEditAuthor.Click += new System.EventHandler(this.ButEditAuthor_Click);
             // 
             // ButDeleteAuthor
             // 
@@ -156,6 +165,7 @@
             this.ButDeleteAuthor.TabIndex = 6;
             this.ButDeleteAuthor.Text = "Delete Author";
             this.ButDeleteAuthor.UseVisualStyleBackColor = true;
+            this.ButDeleteAuthor.Click += new System.EventHandler(this.ButDeleteAuthor_Click);
             // 
             // ButAddAuthor
             // 
@@ -165,21 +175,22 @@
             this.ButAddAuthor.TabIndex = 5;
             this.ButAddAuthor.Text = "Add Author";
             this.ButAddAuthor.UseVisualStyleBackColor = true;
+            this.ButAddAuthor.Click += new System.EventHandler(this.ButAddAuthor_Click);
             // 
-            // dataGridView2
+            // dataGridAuthors
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(7, 188);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(910, 324);
-            this.dataGridView2.TabIndex = 4;
+            this.dataGridAuthors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridAuthors.Location = new System.Drawing.Point(7, 188);
+            this.dataGridAuthors.Name = "dataGridAuthors";
+            this.dataGridAuthors.Size = new System.Drawing.Size(910, 324);
+            this.dataGridAuthors.TabIndex = 4;
             // 
             // TabReaders
             // 
             this.TabReaders.Controls.Add(this.ButEditReader);
             this.TabReaders.Controls.Add(this.ButDeleteReader);
             this.TabReaders.Controls.Add(this.ButAddReader);
-            this.TabReaders.Controls.Add(this.dataGridView3);
+            this.TabReaders.Controls.Add(this.dataGridReaders);
             this.TabReaders.Location = new System.Drawing.Point(4, 22);
             this.TabReaders.Name = "TabReaders";
             this.TabReaders.Padding = new System.Windows.Forms.Padding(3);
@@ -196,6 +207,7 @@
             this.ButEditReader.TabIndex = 7;
             this.ButEditReader.Text = "Edit Reader";
             this.ButEditReader.UseVisualStyleBackColor = true;
+            this.ButEditReader.Click += new System.EventHandler(this.ButEditReader_Click);
             // 
             // ButDeleteReader
             // 
@@ -205,6 +217,7 @@
             this.ButDeleteReader.TabIndex = 6;
             this.ButDeleteReader.Text = "Delete Reader";
             this.ButDeleteReader.UseVisualStyleBackColor = true;
+            this.ButDeleteReader.Click += new System.EventHandler(this.ButDeleteReader_Click);
             // 
             // ButAddReader
             // 
@@ -214,21 +227,22 @@
             this.ButAddReader.TabIndex = 5;
             this.ButAddReader.Text = "Add Reader";
             this.ButAddReader.UseVisualStyleBackColor = true;
+            this.ButAddReader.Click += new System.EventHandler(this.ButAddReader_Click);
             // 
-            // dataGridView3
+            // dataGridReaders
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(7, 188);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(910, 324);
-            this.dataGridView3.TabIndex = 4;
+            this.dataGridReaders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridReaders.Location = new System.Drawing.Point(7, 188);
+            this.dataGridReaders.Name = "dataGridReaders";
+            this.dataGridReaders.Size = new System.Drawing.Size(910, 324);
+            this.dataGridReaders.TabIndex = 4;
             // 
             // TabChecks
             // 
             this.TabChecks.Controls.Add(this.ButEditCheck);
             this.TabChecks.Controls.Add(this.ButDelteCheck);
             this.TabChecks.Controls.Add(this.ButAddCheck);
-            this.TabChecks.Controls.Add(this.dataGridView4);
+            this.TabChecks.Controls.Add(this.dataGridChecks);
             this.TabChecks.Location = new System.Drawing.Point(4, 22);
             this.TabChecks.Name = "TabChecks";
             this.TabChecks.Padding = new System.Windows.Forms.Padding(3);
@@ -248,7 +262,7 @@
             // 
             // ButDelteCheck
             // 
-            this.ButDelteCheck.Location = new System.Drawing.Point(21, 83);
+            this.ButDelteCheck.Location = new System.Drawing.Point(21, 78);
             this.ButDelteCheck.Name = "ButDelteCheck";
             this.ButDelteCheck.Size = new System.Drawing.Size(75, 23);
             this.ButDelteCheck.TabIndex = 6;
@@ -264,13 +278,65 @@
             this.ButAddCheck.Text = "Add Check";
             this.ButAddCheck.UseVisualStyleBackColor = true;
             // 
-            // dataGridView4
+            // dataGridChecks
             // 
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(7, 188);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(910, 324);
-            this.dataGridView4.TabIndex = 4;
+            this.dataGridChecks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridChecks.Location = new System.Drawing.Point(7, 188);
+            this.dataGridChecks.Name = "dataGridChecks";
+            this.dataGridChecks.Size = new System.Drawing.Size(910, 324);
+            this.dataGridChecks.TabIndex = 4;
+            // 
+            // Series
+            // 
+            this.Series.Controls.Add(this.ButEditSeries);
+            this.Series.Controls.Add(this.ButDeleteSeries);
+            this.Series.Controls.Add(this.ButAddSeries);
+            this.Series.Controls.Add(this.dataGridSerieses);
+            this.Series.Location = new System.Drawing.Point(4, 22);
+            this.Series.Name = "Series";
+            this.Series.Padding = new System.Windows.Forms.Padding(3);
+            this.Series.Size = new System.Drawing.Size(925, 533);
+            this.Series.TabIndex = 4;
+            this.Series.Text = "Series";
+            this.Series.UseVisualStyleBackColor = true;
+            // 
+            // ButEditSeries
+            // 
+            this.ButEditSeries.Location = new System.Drawing.Point(21, 142);
+            this.ButEditSeries.Name = "ButEditSeries";
+            this.ButEditSeries.Size = new System.Drawing.Size(75, 23);
+            this.ButEditSeries.TabIndex = 11;
+            this.ButEditSeries.Text = "Edit Series";
+            this.ButEditSeries.UseVisualStyleBackColor = true;
+            this.ButEditSeries.Click += new System.EventHandler(this.ButEditSeries_Click);
+            // 
+            // ButDeleteSeries
+            // 
+            this.ButDeleteSeries.Location = new System.Drawing.Point(21, 78);
+            this.ButDeleteSeries.Name = "ButDeleteSeries";
+            this.ButDeleteSeries.Size = new System.Drawing.Size(75, 23);
+            this.ButDeleteSeries.TabIndex = 10;
+            this.ButDeleteSeries.Text = "Delete Check";
+            this.ButDeleteSeries.UseVisualStyleBackColor = true;
+            this.ButDeleteSeries.Click += new System.EventHandler(this.ButDeleteSeries_Click);
+            // 
+            // ButAddSeries
+            // 
+            this.ButAddSeries.Location = new System.Drawing.Point(21, 20);
+            this.ButAddSeries.Name = "ButAddSeries";
+            this.ButAddSeries.Size = new System.Drawing.Size(75, 23);
+            this.ButAddSeries.TabIndex = 9;
+            this.ButAddSeries.Text = "Add Series";
+            this.ButAddSeries.UseVisualStyleBackColor = true;
+            this.ButAddSeries.Click += new System.EventHandler(this.ButAddSeries_Click);
+            // 
+            // dataGridSerieses
+            // 
+            this.dataGridSerieses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridSerieses.Location = new System.Drawing.Point(7, 188);
+            this.dataGridSerieses.Name = "dataGridSerieses";
+            this.dataGridSerieses.Size = new System.Drawing.Size(910, 324);
+            this.dataGridSerieses.TabIndex = 8;
             // 
             // MainForm
             // 
@@ -285,11 +351,13 @@
             this.TabBooks.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
             this.TabAuthors.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAuthors)).EndInit();
             this.TabReaders.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridReaders)).EndInit();
             this.TabChecks.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridChecks)).EndInit();
+            this.Series.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridSerieses)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -308,15 +376,20 @@
         private System.Windows.Forms.Button ButEditAuthor;
         private System.Windows.Forms.Button ButDeleteAuthor;
         private System.Windows.Forms.Button ButAddAuthor;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridAuthors;
         private System.Windows.Forms.Button ButEditReader;
         private System.Windows.Forms.Button ButDeleteReader;
         private System.Windows.Forms.Button ButAddReader;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView dataGridReaders;
         private System.Windows.Forms.Button ButEditCheck;
         private System.Windows.Forms.Button ButDelteCheck;
         private System.Windows.Forms.Button ButAddCheck;
-        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridView dataGridChecks;
+        private System.Windows.Forms.TabPage Series;
+        private System.Windows.Forms.Button ButEditSeries;
+        private System.Windows.Forms.Button ButDeleteSeries;
+        private System.Windows.Forms.Button ButAddSeries;
+        private System.Windows.Forms.DataGridView dataGridSerieses;
     }
 }
 

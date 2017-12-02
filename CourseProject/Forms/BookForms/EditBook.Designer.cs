@@ -1,6 +1,6 @@
 ﻿namespace CourseProject.Forms.BookForms
 {
-    partial class EditBook
+    partial class EditAuthor
     {
         /// <summary>
         /// Required designer variable.

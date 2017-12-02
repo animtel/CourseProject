@@ -76,6 +76,7 @@
             this.ButAddAuthor.TabIndex = 4;
             this.ButAddAuthor.Text = "Add";
             this.ButAddAuthor.UseVisualStyleBackColor = true;
+            this.ButAddAuthor.Click += new System.EventHandler(this.ButAddAuthor_Click);
             // 
             // ButCancelAuhtor
             // 
@@ -86,7 +87,7 @@
             this.ButCancelAuhtor.Text = "Cancel";
             this.ButCancelAuhtor.UseVisualStyleBackColor = true;
             // 
-            // AddAuthor
+            // AddBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -97,8 +98,8 @@
             this.Controls.Add(this.LaberFIOAuthor);
             this.Controls.Add(this.TBYearAuthor);
             this.Controls.Add(this.TBFIOAuthor);
-            this.Name = "AddAuthor";
-            this.Text = "AddAuthor";
+            this.Name = "AddBook";
+            this.Text = "AddBook";
             this.ResumeLayout(false);
             this.PerformLayout();
 

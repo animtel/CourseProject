@@ -11,7 +11,7 @@ using CourseProject.Models;
 
 namespace CourseProject.Forms.BookForms
 {
-    public partial class EditBook : Form
+    public partial class EditAuthor : Form
     {
         MainForm _mainForm;
         internal protected int Id;
@@ -25,7 +25,7 @@ namespace CourseProject.Forms.BookForms
 
         internal protected bool flag;
 
-        public EditBook(MainForm mainform, Books currentBook)
+        public EditAuthor(MainForm mainform, Books currentBook)
         {
             flag = false;
             _mainForm = mainform;
@@ -49,7 +49,7 @@ namespace CourseProject.Forms.BookForms
         private List<string> GetAuthors()
         {
             List<string> authors = new List<string>();
-            foreach (var item in _mainForm._db.Authprs)
+            foreach (var item in _mainForm._db.Authors)
             {
                 authors.Add(item.Id + " " + item.FIO);
             }

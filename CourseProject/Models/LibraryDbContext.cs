@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace CourseProject.Models
 {
-    public class LibraryDbContext : DbContext
+    public class LibraryDbContext : DbContext //TODO!
     {
         public LibraryDbContext()
             :base("LibraryDbConnection")
         { }
 
         public DbSet<Books> Books{ get; set; }
-        public DbSet<Authors> Authprs { get; set; }
+        public DbSet<Authors> Authors { get; set; }
         public DbSet<Checks> Checks { get; set; }
         public DbSet<Readers> Readers { get; set; }
         public DbSet<Serieses> BookSerieses { get; set; }

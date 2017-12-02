@@ -55,6 +55,7 @@
             this.ButEditReader.TabIndex = 14;
             this.ButEditReader.Text = "Edit";
             this.ButEditReader.UseVisualStyleBackColor = true;
+            this.ButEditReader.Click += new System.EventHandler(this.ButEditReader_Click);
             // 
             // LabelTelephonereader
             // 
