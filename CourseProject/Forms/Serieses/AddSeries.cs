@@ -20,25 +20,25 @@ namespace CourseProject.Forms.Serieses
         private List<string> _AuthorInf;
         private List<string> _BookInf;
 
-        public AddSeries(MainForm t)
+        public AddSeries(MainForm mainform)
         {
             InitializeComponent();
-            GetInfo(t);
+            GetInfo(mainform);
             CBAuthor.DataSource = _AuthorInf;
             CBFirstName.DataSource = _BookInf;
             CBLastName.DataSource = _BookInf;
             flag = false;
         }
 
-        private void GetInfo(MainForm t)
+        private void GetInfo(MainForm mainform)
         {
             _AuthorInf = new List<string>();
-            foreach (var item in t._db.Authors.ToList())
+            foreach (var item in mainform._db.Authors.ToList())
             {
                 _AuthorInf.Add(item.Id + " " + item.FIO);
             }
             _BookInf = new List<string>();
-            foreach (var item in t._db.Books)
+            foreach (var item in mainform._db.Books.ToList())
             {
                 _BookInf.Add(item.Id + " \"" + item.Name + "\" " + item.Year.ToString());
             }

@@ -62,7 +62,7 @@ namespace CourseProject.Forms.BookForms
                 Author = CBAuthors.Text.Split(' ')[0];
                 Publishing = TBPublishingBook.Text;
                 Year = TBYear.Text;
-                Amount = Int32.Parse(TBAmountBook.TextAlign.ToString());
+                Amount = Int32.Parse(TBAmountBook.Value.ToString());
                 Price = TBPriceBook.Text;
                 Serieses = CBSeriesBook.Text.Split(' ')[0];
                 flag = true;

@@ -25,23 +25,25 @@ namespace CourseProject.Forms.AuthorForms
             flag = false;
         }
 
-        private void ButChangeAuthor_Click(object sender, EventArgs e)
+        private void ButCancelAuhtor_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void ButAddAuthor_Click(object sender, EventArgs e)
         {
             try
             {
                 FIO = TBFIOAuthor.Text;
                 YearBorn = TBYearAuthor.Text;
                 flag = true;
+                Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error");
-            }
-        }
 
-        private void ButCancelAuhtor_Click(object sender, EventArgs e)
-        {
-            Close();
+            }
         }
     }
 }

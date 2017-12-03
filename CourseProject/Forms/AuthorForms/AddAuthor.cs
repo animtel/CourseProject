@@ -33,11 +33,17 @@ namespace CourseProject.Forms.AuthorForms
                 Fio = TBFIOAuthor.Text;
                 Year = Int32.Parse(TBYearAuthor.Text);
                 flag = true;
+                Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error!");
             }
+        }
+
+        private void ButCancelAuhtor_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -8,12 +8,12 @@ namespace CourseProject.Models
 
     public partial class Books
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Books()
         {
-            Checks = new HashSet<Checks>();
-            Serieses1 = new HashSet<Serieses>();
-            Serieses2 = new HashSet<Serieses>();
+            //Checks = new HashSet<Checks>();
+            //Serieses1 = new HashSet<Serieses>();
+            //Serieses2 = new HashSet<Serieses>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -39,17 +39,17 @@ namespace CourseProject.Models
 
         public int? SeriesId { get; set; }
 
-        public virtual Authors Authors { get; set; }
+        //public virtual Authors Authors { get; set; }
 
-        public virtual Serieses Serieses { get; set; }
+        //public virtual Serieses Serieses { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Checks> Checks { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<Checks> Checks { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Serieses> Serieses1 { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<Serieses> Serieses1 { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Serieses> Serieses2 { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<Serieses> Serieses2 { get; set; }
     }
 }

@@ -51,8 +51,9 @@
             this.ButAddAuthor.Name = "ButAddAuthor";
             this.ButAddAuthor.Size = new System.Drawing.Size(75, 23);
             this.ButAddAuthor.TabIndex = 10;
-            this.ButAddAuthor.Text = "Add";
+            this.ButAddAuthor.Text = "Change";
             this.ButAddAuthor.UseVisualStyleBackColor = true;
+            this.ButAddAuthor.Click += new System.EventHandler(this.ButAddAuthor_Click);
             // 
             // LabelYearAuthor
             // 

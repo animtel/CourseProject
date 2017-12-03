@@ -8,7 +8,7 @@ namespace CourseProject.Models
 
     public partial class Checks
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         public int Book_Id { get; set; }
@@ -19,8 +19,8 @@ namespace CourseProject.Models
         [StringLength(50)]
         public string Date { get; set; }
 
-        public virtual Books Books { get; set; }
+        //public virtual Books Books { get; set; }
 
-        public virtual Readers Readers { get; set; }
+        //public virtual Readers Readers { get; set; }
     }
 }

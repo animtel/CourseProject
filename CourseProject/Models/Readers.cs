@@ -8,10 +8,10 @@ namespace CourseProject.Models
 
     public partial class Readers
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Readers()
         {
-            Checks = new HashSet<Checks>();
+            //Checks = new HashSet<Checks>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -27,7 +27,7 @@ namespace CourseProject.Models
         [StringLength(50)]
         public string Telephone { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Checks> Checks { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<Checks> Checks { get; set; }
     }
 }

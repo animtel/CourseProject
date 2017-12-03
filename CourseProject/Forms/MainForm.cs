@@ -27,6 +27,7 @@ namespace CourseProject
         {
             _db = new LibraryDbContext();
             InitializeComponent();
+            dataGridAuthors.DataSource = _db.Authors.ToList();
         }
 
         #region BooksOperation
@@ -39,7 +40,7 @@ namespace CourseProject
             {
                 try
                 {
-                    _db.Books.Add(new Books
+                    Books book = new Books()
                     {
                         Name = _bookform.Name,
                         Author = Int32.Parse(_bookform.Author),
@@ -48,7 +49,8 @@ namespace CourseProject
                         SeriesId = Int32.Parse(_bookform.Serieses),
                         Publishing = _bookform.Publishing,
                         Year = Int32.Parse(_bookform.Year)
-                    });
+                    };
+                    _db.Books.Add(book);
 
                     _db.SaveChanges();
                 }
@@ -112,12 +114,10 @@ namespace CourseProject
             {
                 try
                 {
-                    _db.Authors.Add(new Authors {
-                        FIO = _authorForm.Fio,
-                        Year = _authorForm.Year
-                    });
-
+                    Authors aut = new Authors() { FIO = _authorForm.Fio, Year = _authorForm.Year };
+                    _db.Authors.Add(aut);
                     _db.SaveChanges();
+                    dataGridAuthors.DataSource = _db.Authors.ToList();
                 }
                 catch (Exception ex)
                 {
@@ -130,6 +130,9 @@ namespace CourseProject
         {
             int idOfAuthor = Int32.Parse(dataGridAuthors.CurrentRow.Cells[0].Value.ToString());
             _db.Authors.Remove(_db.Authors.Single(item => item.Id == idOfAuthor));
+            _db.SaveChanges();
+            dataGridAuthors.DataSource = _db.Authors.ToList();
+
         }
 
         private void ButEditAuthor_Click(object sender, EventArgs e)
@@ -145,6 +148,7 @@ namespace CourseProject
                     curauthor.FIO = editAuthor.FIO;
                     curauthor.Year = Int32.Parse(editAuthor.YearBorn);
                     _db.SaveChanges();
+                    dataGridAuthors.DataSource = _db.Authors.ToList();
                 }
                 catch (Exception ex)
                 {
