@@ -38,11 +38,19 @@ namespace CourseProject.Forms.ReaderForms
                 Address = TBAddress.Text;
                 Telephone = TBTelephone.Text;
                 flag = true;
+                Close();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error");
             }
+        }
+
+        private void ButCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+
         }
     }
 }

@@ -66,12 +66,18 @@ namespace CourseProject.Forms.BookForms
                 Price = TBPriceBook.Text;
                 Serieses = CBSeriesBook.Text.Split(' ')[0];
                 flag = true;
-
+                Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("ERROR!");
             }
+        }
+
+        private void ButCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+
         }
     }
 }

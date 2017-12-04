@@ -11,7 +11,7 @@ using CourseProject.Models;
 
 namespace CourseProject.Forms.BookForms
 {
-    public partial class EditAuthor : Form
+    public partial class EditBook : Form
     {
         MainForm _mainForm;
         internal protected int Id;
@@ -25,25 +25,22 @@ namespace CourseProject.Forms.BookForms
 
         internal protected bool flag;
 
-        public EditAuthor(MainForm mainform, Books currentBook)
+        public EditBook(MainForm mainform, Books currentBook)
         {
             flag = false;
             _mainForm = mainform;
 
             InitializeComponent();
-            CBAuthors.DataSource = GetAuthors();
-            CBSeriesBook.DataSource = GetSerieses();
-
-            InitializeComponent();
+            
             TBNameOfBook.Text = currentBook.Name;
             CBAuthors.Items.AddRange(GetAuthors().ToArray());
-            CBAuthors.SelectedText = GetAuthors().Single(item => item.Contains(currentBook.Author.ToString() + ' '));
+            CBAuthors.SelectedIndex = GetAuthors().IndexOf(GetAuthors().Single(item => item.Contains(currentBook.Author.ToString() + ' ')));
             TBPriceBook.Text = currentBook.Price;
             TBPublishingBook.Text = currentBook.Publishing;
             TBAmountBook.Value = currentBook.Amount;
             TBYear.Text = currentBook.Year.ToString();
             CBSeriesBook.Items.AddRange(GetSerieses().ToArray());
-            CBSeriesBook.SelectedText = GetSerieses().Single(item => item.Contains(currentBook.SeriesId.ToString() + ' '));
+            CBSeriesBook.SelectedIndex = GetSerieses().IndexOf(GetSerieses().Single(item => item.Contains(currentBook.SeriesId.ToString() + ' ')));
         }
 
         private List<string> GetAuthors()
@@ -74,16 +71,24 @@ namespace CourseProject.Forms.BookForms
                 Author = CBAuthors.Text.Split(' ')[0];
                 Publishing = TBPublishingBook.Text;
                 Year = TBYear.Text;
-                Amount = Int32.Parse(TBAmountBook.TextAlign.ToString());
+                Amount = Int32.Parse(TBAmountBook.Value.ToString());
                 Price = TBPriceBook.Text;
                 Serieses = CBSeriesBook.Text.Split(' ')[0];
                 flag = true;
+                Close();
+
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show("ERROR!");
             }
+        }
+
+        private void ButCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+
         }
     }
 }

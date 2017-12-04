@@ -94,6 +94,7 @@
             this.ButAddReader.TabIndex = 6;
             this.ButAddReader.Text = "Add";
             this.ButAddReader.UseVisualStyleBackColor = true;
+            this.ButAddReader.Click += new System.EventHandler(this.ButAddReader_Click_1);
             // 
             // ButCancel
             // 
@@ -103,6 +104,7 @@
             this.ButCancel.TabIndex = 7;
             this.ButCancel.Text = "Cancel";
             this.ButCancel.UseVisualStyleBackColor = true;
+            this.ButCancel.Click += new System.EventHandler(this.ButCancel_Click_1);
             // 
             // AddReader
             // 

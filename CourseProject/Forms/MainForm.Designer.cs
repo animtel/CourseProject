@@ -30,10 +30,11 @@
         {
             this.Library = new System.Windows.Forms.TabControl();
             this.TabBooks = new System.Windows.Forms.TabPage();
+            this.ButSort = new System.Windows.Forms.Button();
             this.ButEditBook = new System.Windows.Forms.Button();
             this.ButDeleteBook = new System.Windows.Forms.Button();
             this.ButAddBook = new System.Windows.Forms.Button();
-            this.DataGrid = new System.Windows.Forms.DataGridView();
+            this.dataGridBooks = new System.Windows.Forms.DataGridView();
             this.TabAuthors = new System.Windows.Forms.TabPage();
             this.ButEditAuthor = new System.Windows.Forms.Button();
             this.ButDeleteAuthor = new System.Windows.Forms.Button();
@@ -45,6 +46,7 @@
             this.ButAddReader = new System.Windows.Forms.Button();
             this.dataGridReaders = new System.Windows.Forms.DataGridView();
             this.TabChecks = new System.Windows.Forms.TabPage();
+            this.BTSaveCheck = new System.Windows.Forms.Button();
             this.ButEditCheck = new System.Windows.Forms.Button();
             this.ButDelteCheck = new System.Windows.Forms.Button();
             this.ButAddCheck = new System.Windows.Forms.Button();
@@ -54,9 +56,16 @@
             this.ButDeleteSeries = new System.Windows.Forms.Button();
             this.ButAddSeries = new System.Windows.Forms.Button();
             this.dataGridSerieses = new System.Windows.Forms.DataGridView();
+            this.saveCheck = new System.Windows.Forms.SaveFileDialog();
+            this.CBChooseSort = new System.Windows.Forms.ComboBox();
+            this.CBChooseSortAuthors = new System.Windows.Forms.ComboBox();
+            this.ButSortAuthors = new System.Windows.Forms.Button();
+            this.CBChooseSortReaders = new System.Windows.Forms.ComboBox();
+            this.ButSortReaders = new System.Windows.Forms.Button();
+            this.ButSortChecks = new System.Windows.Forms.Button();
             this.Library.SuspendLayout();
             this.TabBooks.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridBooks)).BeginInit();
             this.TabAuthors.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAuthors)).BeginInit();
             this.TabReaders.SuspendLayout();
@@ -83,10 +92,12 @@
             // 
             // TabBooks
             // 
+            this.TabBooks.Controls.Add(this.CBChooseSort);
+            this.TabBooks.Controls.Add(this.ButSort);
             this.TabBooks.Controls.Add(this.ButEditBook);
             this.TabBooks.Controls.Add(this.ButDeleteBook);
             this.TabBooks.Controls.Add(this.ButAddBook);
-            this.TabBooks.Controls.Add(this.DataGrid);
+            this.TabBooks.Controls.Add(this.dataGridBooks);
             this.TabBooks.Location = new System.Drawing.Point(4, 22);
             this.TabBooks.Name = "TabBooks";
             this.TabBooks.Padding = new System.Windows.Forms.Padding(3);
@@ -94,6 +105,16 @@
             this.TabBooks.TabIndex = 0;
             this.TabBooks.Text = "Books";
             this.TabBooks.UseVisualStyleBackColor = true;
+            // 
+            // ButSort
+            // 
+            this.ButSort.Location = new System.Drawing.Point(480, 174);
+            this.ButSort.Name = "ButSort";
+            this.ButSort.Size = new System.Drawing.Size(75, 23);
+            this.ButSort.TabIndex = 4;
+            this.ButSort.Text = "Sort";
+            this.ButSort.UseVisualStyleBackColor = true;
+            this.ButSort.Click += new System.EventHandler(this.button1_Click);
             // 
             // ButEditBook
             // 
@@ -125,16 +146,18 @@
             this.ButAddBook.UseVisualStyleBackColor = true;
             this.ButAddBook.Click += new System.EventHandler(this.ButAddBook_Click);
             // 
-            // DataGrid
+            // dataGridBooks
             // 
-            this.DataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGrid.Location = new System.Drawing.Point(6, 203);
-            this.DataGrid.Name = "DataGrid";
-            this.DataGrid.Size = new System.Drawing.Size(910, 324);
-            this.DataGrid.TabIndex = 0;
+            this.dataGridBooks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridBooks.Location = new System.Drawing.Point(6, 203);
+            this.dataGridBooks.Name = "dataGridBooks";
+            this.dataGridBooks.Size = new System.Drawing.Size(910, 324);
+            this.dataGridBooks.TabIndex = 0;
             // 
             // TabAuthors
             // 
+            this.TabAuthors.Controls.Add(this.CBChooseSortAuthors);
+            this.TabAuthors.Controls.Add(this.ButSortAuthors);
             this.TabAuthors.Controls.Add(this.ButEditAuthor);
             this.TabAuthors.Controls.Add(this.ButDeleteAuthor);
             this.TabAuthors.Controls.Add(this.ButAddAuthor);
@@ -144,7 +167,7 @@
             this.TabAuthors.Padding = new System.Windows.Forms.Padding(3);
             this.TabAuthors.Size = new System.Drawing.Size(925, 533);
             this.TabAuthors.TabIndex = 1;
-            this.TabAuthors.Text = "Books";
+            this.TabAuthors.Text = "Authors";
             this.TabAuthors.UseVisualStyleBackColor = true;
             // 
             // ButEditAuthor
@@ -187,6 +210,8 @@
             // 
             // TabReaders
             // 
+            this.TabReaders.Controls.Add(this.CBChooseSortReaders);
+            this.TabReaders.Controls.Add(this.ButSortReaders);
             this.TabReaders.Controls.Add(this.ButEditReader);
             this.TabReaders.Controls.Add(this.ButDeleteReader);
             this.TabReaders.Controls.Add(this.ButAddReader);
@@ -239,6 +264,8 @@
             // 
             // TabChecks
             // 
+            this.TabChecks.Controls.Add(this.ButSortChecks);
+            this.TabChecks.Controls.Add(this.BTSaveCheck);
             this.TabChecks.Controls.Add(this.ButEditCheck);
             this.TabChecks.Controls.Add(this.ButDelteCheck);
             this.TabChecks.Controls.Add(this.ButAddCheck);
@@ -250,6 +277,16 @@
             this.TabChecks.TabIndex = 3;
             this.TabChecks.Text = "Checks";
             this.TabChecks.UseVisualStyleBackColor = true;
+            // 
+            // BTSaveCheck
+            // 
+            this.BTSaveCheck.Location = new System.Drawing.Point(344, 19);
+            this.BTSaveCheck.Name = "BTSaveCheck";
+            this.BTSaveCheck.Size = new System.Drawing.Size(75, 23);
+            this.BTSaveCheck.TabIndex = 8;
+            this.BTSaveCheck.Text = "Save Check";
+            this.BTSaveCheck.UseVisualStyleBackColor = true;
+            this.BTSaveCheck.Click += new System.EventHandler(this.BTSaveCheck_Click);
             // 
             // ButEditCheck
             // 
@@ -268,6 +305,7 @@
             this.ButDelteCheck.TabIndex = 6;
             this.ButDelteCheck.Text = "Delete Check";
             this.ButDelteCheck.UseVisualStyleBackColor = true;
+            this.ButDelteCheck.Click += new System.EventHandler(this.ButDelteCheck_Click);
             // 
             // ButAddCheck
             // 
@@ -338,6 +376,77 @@
             this.dataGridSerieses.Size = new System.Drawing.Size(910, 324);
             this.dataGridSerieses.TabIndex = 8;
             // 
+            // CBChooseSort
+            // 
+            this.CBChooseSort.FormattingEnabled = true;
+            this.CBChooseSort.Items.AddRange(new object[] {
+            "Name",
+            "Publishing",
+            "Author",
+            "Year",
+            "Amount",
+            "Price"});
+            this.CBChooseSort.Location = new System.Drawing.Point(312, 174);
+            this.CBChooseSort.Name = "CBChooseSort";
+            this.CBChooseSort.Size = new System.Drawing.Size(121, 21);
+            this.CBChooseSort.TabIndex = 5;
+            this.CBChooseSort.Text = "Name";
+            // 
+            // CBChooseSortAuthors
+            // 
+            this.CBChooseSortAuthors.FormattingEnabled = true;
+            this.CBChooseSortAuthors.Items.AddRange(new object[] {
+            "Fio",
+            "Year"});
+            this.CBChooseSortAuthors.Location = new System.Drawing.Point(340, 144);
+            this.CBChooseSortAuthors.Name = "CBChooseSortAuthors";
+            this.CBChooseSortAuthors.Size = new System.Drawing.Size(121, 21);
+            this.CBChooseSortAuthors.TabIndex = 9;
+            this.CBChooseSortAuthors.Text = "Fio";
+            // 
+            // ButSortAuthors
+            // 
+            this.ButSortAuthors.Location = new System.Drawing.Point(508, 144);
+            this.ButSortAuthors.Name = "ButSortAuthors";
+            this.ButSortAuthors.Size = new System.Drawing.Size(75, 23);
+            this.ButSortAuthors.TabIndex = 8;
+            this.ButSortAuthors.Text = "Sort";
+            this.ButSortAuthors.UseVisualStyleBackColor = true;
+            this.ButSortAuthors.Click += new System.EventHandler(this.ButSortAuthors_Click);
+            // 
+            // CBChooseSortReaders
+            // 
+            this.CBChooseSortReaders.FormattingEnabled = true;
+            this.CBChooseSortReaders.Items.AddRange(new object[] {
+            "Fio",
+            "Address",
+            "Telephone"});
+            this.CBChooseSortReaders.Location = new System.Drawing.Point(325, 161);
+            this.CBChooseSortReaders.Name = "CBChooseSortReaders";
+            this.CBChooseSortReaders.Size = new System.Drawing.Size(121, 21);
+            this.CBChooseSortReaders.TabIndex = 9;
+            this.CBChooseSortReaders.Text = "Fio";
+            // 
+            // ButSortReaders
+            // 
+            this.ButSortReaders.Location = new System.Drawing.Point(493, 161);
+            this.ButSortReaders.Name = "ButSortReaders";
+            this.ButSortReaders.Size = new System.Drawing.Size(75, 23);
+            this.ButSortReaders.TabIndex = 8;
+            this.ButSortReaders.Text = "Sort";
+            this.ButSortReaders.UseVisualStyleBackColor = true;
+            this.ButSortReaders.Click += new System.EventHandler(this.ButSortReaders_Click);
+            // 
+            // ButSortChecks
+            // 
+            this.ButSortChecks.Location = new System.Drawing.Point(477, 133);
+            this.ButSortChecks.Name = "ButSortChecks";
+            this.ButSortChecks.Size = new System.Drawing.Size(75, 23);
+            this.ButSortChecks.TabIndex = 9;
+            this.ButSortChecks.Text = "Sort By Date";
+            this.ButSortChecks.UseVisualStyleBackColor = true;
+            this.ButSortChecks.Click += new System.EventHandler(this.ButSortChecks_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -349,7 +458,7 @@
             this.Text = "Library";
             this.Library.ResumeLayout(false);
             this.TabBooks.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridBooks)).EndInit();
             this.TabAuthors.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAuthors)).EndInit();
             this.TabReaders.ResumeLayout(false);
@@ -372,7 +481,7 @@
         private System.Windows.Forms.Button ButEditBook;
         private System.Windows.Forms.Button ButDeleteBook;
         private System.Windows.Forms.Button ButAddBook;
-        private System.Windows.Forms.DataGridView DataGrid;
+        private System.Windows.Forms.DataGridView dataGridBooks;
         private System.Windows.Forms.Button ButEditAuthor;
         private System.Windows.Forms.Button ButDeleteAuthor;
         private System.Windows.Forms.Button ButAddAuthor;
@@ -390,6 +499,15 @@
         private System.Windows.Forms.Button ButDeleteSeries;
         private System.Windows.Forms.Button ButAddSeries;
         private System.Windows.Forms.DataGridView dataGridSerieses;
+        private System.Windows.Forms.SaveFileDialog saveCheck;
+        private System.Windows.Forms.Button BTSaveCheck;
+        private System.Windows.Forms.Button ButSort;
+        private System.Windows.Forms.ComboBox CBChooseSort;
+        private System.Windows.Forms.ComboBox CBChooseSortAuthors;
+        private System.Windows.Forms.Button ButSortAuthors;
+        private System.Windows.Forms.ComboBox CBChooseSortReaders;
+        private System.Windows.Forms.Button ButSortReaders;
+        private System.Windows.Forms.Button ButSortChecks;
     }
 }
 

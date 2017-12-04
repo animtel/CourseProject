@@ -48,6 +48,7 @@
             this.ButCancel.TabIndex = 19;
             this.ButCancel.Text = "Cancel";
             this.ButCancel.UseVisualStyleBackColor = true;
+            this.ButCancel.Click += new System.EventHandler(this.ButCancel_Click);
             // 
             // ButAddSeries
             // 

@@ -23,7 +23,12 @@ namespace CourseProject.Forms.ReaderForms
             flag = false;
         }
 
-        private void ButAddReader_Click(object sender, EventArgs e)
+        private void ButCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void ButAddReader_Click_1(object sender, EventArgs e)
         {
             FIO = TBFio.Text;
             adress = TBAddress.Text;
@@ -32,9 +37,10 @@ namespace CourseProject.Forms.ReaderForms
             Close();
         }
 
-        private void ButCancel_Click(object sender, EventArgs e)
+        private void ButCancel_Click_1(object sender, EventArgs e)
         {
             Close();
+
         }
     }
 }

@@ -28,6 +28,9 @@ namespace CourseProject
             _db = new LibraryDbContext();
             InitializeComponent();
             dataGridAuthors.DataSource = _db.Authors.ToList();
+            dataGridBooks.DataSource = _db.Books.ToList();
+            dataGridReaders.DataSource = _db.Readers.ToList();
+            dataGridSerieses.DataSource = _db.BookSerieses.ToList();
         }
 
         #region BooksOperation
@@ -40,19 +43,31 @@ namespace CourseProject
             {
                 try
                 {
+                    int? nullId;
+                    var IsNullSeries = _bookform.Serieses == String.Empty;
+                    if (IsNullSeries)
+                    {
+                        nullId = null;
+                    }
+                    else
+                    {
+                        nullId = Int32.Parse(_bookform.Serieses);
+                    }
                     Books book = new Books()
                     {
                         Name = _bookform.Name,
                         Author = Int32.Parse(_bookform.Author),
                         Amount = _bookform.Amount,
                         Price = _bookform.Price,
-                        SeriesId = Int32.Parse(_bookform.Serieses),
+                        SeriesId = nullId,
                         Publishing = _bookform.Publishing,
                         Year = Int32.Parse(_bookform.Year)
                     };
                     _db.Books.Add(book);
 
                     _db.SaveChanges();
+                    dataGridBooks.DataSource = _db.Books.ToList();
+
                 }
                 catch (Exception ex)
                 {
@@ -63,39 +78,44 @@ namespace CourseProject
 
         private void ButDeleteBook_Click(object sender, EventArgs e)
         {
-            int idOfBook = Int32.Parse(DataGrid.CurrentRow.Cells[0].Value.ToString());
-            _db.Books.Remove(_db.Books.Single(item => item.Id == idOfBook));
+            try
+            {
+                int? idOfBook = Int32.Parse(dataGridBooks.CurrentRow.Cells[0].Value.ToString());
+                var isIdNull = idOfBook == null || idOfBook == 0;
+                if (!isIdNull)
+                {
+                    _db.Books.Remove(_db.Books.Single(item => item.Id == idOfBook));
+                    _db.SaveChanges();
+                    dataGridBooks.DataSource = _db.Books.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Сори используется в сериях...");
+            }
+            
         }
 
         private void ButEditBook_Click(object sender, EventArgs e)
         {
-            int idOfBook = Int32.Parse(DataGrid.CurrentRow.Cells[0].Value.ToString());
+            int idOfBook = Int32.Parse(dataGridBooks.CurrentRow.Cells[0].Value.ToString());
 
-            Forms.BookForms.EditAuthor _bookform = new Forms.BookForms.EditAuthor(this, _db.Books.Single(item => item.Id == idOfBook));
-
-            _bookform.ShowDialog();
-            if (_bookform.flag)
+            Books currentBook = _db.Books.Single(item => item.Id == idOfBook);
+            EditBook editBook = new EditBook(this, currentBook);
+            editBook.ShowDialog();
+            if (editBook.flag)
             {
                 try
                 {
-
-                    using (IDbConnection db = new SqlConnection(_connectionString))
-                    {
-
-                        var sqlQuery = "UPDATE dbo.Books SET Name = @Name, Author = @Author, Publishing = @Publishing, Year = @Year, Amount = @Amount, Price = @Price, SeriesId = @SeriesId WHERE Id = @Id";
-                        db.Execute(sqlQuery, new Books
-                        {
-                            Name = _bookform.Name,
-                            Author = Int32.Parse(_bookform.Author),
-                            Amount = _bookform.Amount,
-                            Price = _bookform.Price,
-                            SeriesId = Int32.Parse(_bookform.Serieses),
-                            Publishing = _bookform.Publishing,
-                            Year = Int32.Parse(_bookform.Year)
-                        });
-                    }
-
+                    currentBook.Name = editBook.Name;
+                    currentBook.Price = editBook.Price;
+                    currentBook.Publishing = editBook.Publishing;
+                    currentBook.Amount = editBook.Amount;
+                    currentBook.Author = Int32.Parse(editBook.Author);
+                    currentBook.Year = Int32.Parse(editBook.Year);
+                    currentBook.SeriesId = Int32.Parse(editBook.Serieses);
                     _db.SaveChanges();
+                    dataGridBooks.DataSource = _db.Books.ToList();
                 }
                 catch (Exception ex)
                 {
@@ -174,6 +194,8 @@ namespace CourseProject
                         Telephone = new_reader.telephone,
                     });
                     _db.SaveChanges();
+                    dataGridReaders.DataSource = _db.Readers.ToList();
+
                 }
                 catch (Exception ex)
                 {
@@ -184,29 +206,19 @@ namespace CourseProject
 
         private void ButEditReader_Click(object sender, EventArgs e)
         {
-            int idOfReader = Int32.Parse(dataGridReaders.CurrentRow.Cells[0].Value.ToString());
-
-            EditReader _readerForm = new EditReader(this, _db.Readers.Single(item => item.Id == idOfReader));
-
-            _readerForm.ShowDialog();
-            if (_readerForm.flag)
+            int id = Int32.Parse(dataGridReaders.CurrentRow.Cells[0].Value.ToString());
+            Readers currentReader = _db.Readers.Single(item => item.Id == id);
+            EditReader editReader = new EditReader(this, currentReader);
+            editReader.ShowDialog();
+            if (editReader.flag)
             {
                 try
                 {
-
-                    using (IDbConnection db = new SqlConnection(_connectionString))
-                    {
-
-                        var sqlQuery = "UPDATE dbo.Readers SET FIO = @Fio, Address = @Address, Telephone = @Telephone WHERE Id = @Id";
-                        db.Execute(sqlQuery, new Readers
-                        {
-                            FIO = _readerForm.Fio,
-                            Address = _readerForm.Address,
-                            Telephone = _readerForm.Telephone
-                        });
-                    }
-
+                    currentReader.FIO = editReader.Fio;
+                    currentReader.Address = editReader.Address;
+                    currentReader.Telephone = editReader.Telephone;
                     _db.SaveChanges();
+                    dataGridReaders.DataSource = _db.Readers.ToList();
                 }
                 catch (Exception ex)
                 {
@@ -219,9 +231,23 @@ namespace CourseProject
         {
             int idOfReader = Int32.Parse(dataGridReaders.CurrentRow.Cells[0].Value.ToString());
             _db.Readers.Remove(_db.Readers.Single(item => item.Id == idOfReader));
+            _db.SaveChanges();
+            dataGridReaders.DataSource = _db.Readers.ToList();
+
         }
         #endregion
 
+        #region ChecksOperation
+
+        private void ButDelteCheck_Click(object sender, EventArgs e)
+        {
+            int idOfCheck = Int32.Parse(dataGridChecks.CurrentRow.Cells[0].Value.ToString());
+            _db.Checks.Remove(_db.Checks.Single(Item => Item.Id == idOfCheck));
+            _db.SaveChanges();
+            dataGridChecks.DataSource = _db.Checks.ToList();
+        }
+
+        #endregion
 
         #region SeriesesOperations
         private void ButAddSeries_Click(object sender, EventArgs e)
@@ -240,6 +266,8 @@ namespace CourseProject
                         Author = new_series.AuthorID
                     });
                     _db.SaveChanges();
+                    dataGridSerieses.DataSource = _db.BookSerieses.ToList();
+
                 }
                 catch (Exception ex)
                 {
@@ -255,6 +283,8 @@ namespace CourseProject
                 int seriesesID = Int32.Parse(dataGridSerieses.CurrentRow.Cells[0].Value.ToString());
                 _db.BookSerieses.Remove(_db.BookSerieses.Single(item => item.Id == seriesesID));
                 _db.SaveChanges();
+                dataGridSerieses.DataSource = _db.BookSerieses.ToList();
+
             }
             catch (Exception ex)
             {
@@ -264,30 +294,20 @@ namespace CourseProject
 
         private void ButEditSeries_Click(object sender, EventArgs e)
         {
-            int idOfSeries = Int32.Parse(dataGridSerieses.CurrentRow.Cells[0].Value.ToString());
-
-            EditSeries _seriesForm = new EditSeries(this, _db.BookSerieses.Single(item => item.Id == idOfSeries));
-
-            _seriesForm.ShowDialog();
-            if (_seriesForm.flag)
+            int id = Int32.Parse(dataGridSerieses.CurrentRow.Cells[0].Value.ToString());
+            Serieses currentSeries = _db.BookSerieses.Single(item => item.Id == id);
+            EditSeries editSeries = new EditSeries(this, currentSeries);
+            editSeries.ShowDialog();
+            if (editSeries.flag)
             {
                 try
                 {
-
-                    using (IDbConnection db = new SqlConnection(_connectionString))
-                    {
-
-                        var sqlQuery = "UPDATE dbo.BookSerieses SET Name = @Name, First_Book = @First_Bookm, Last_Book = @Last_Book WHERE Id = @Id";
-                        db.Execute(sqlQuery, new Serieses
-                        {
-                            Name = _seriesForm.Name,
-                            First_Book = _seriesForm.FirstBook,
-                            Last_Book = _seriesForm.LastBook,
-                            Author = _seriesForm.Author
-                        });
-                    }
-
+                    currentSeries.Last_Book = editSeries.LastBook;
+                    currentSeries.First_Book = editSeries.FirstBook;
+                    currentSeries.Author = editSeries.Author;
+                    currentSeries.Name = editSeries.Name;
                     _db.SaveChanges();
+                    dataGridSerieses.DataSource = _db.BookSerieses.ToList();
                 }
                 catch (Exception ex)
                 {
@@ -297,5 +317,113 @@ namespace CourseProject
         }
         #endregion
 
+        private void BTSaveCheck_Click(object sender, EventArgs e)
+        {
+            saveCheck.Filter = "TXT Text|*.txt";
+            saveCheck.Title = "Save a report file";
+            saveCheck.ShowDialog();
+            if (saveCheck.FileName != "")
+            {
+                System.IO.StreamWriter fileSave = new System.IO.StreamWriter(saveCheck.FileName);
+                int idOfCheck = Int32.Parse(dataGridChecks.CurrentRow.Cells[0].Value.ToString());
+                Checks check = _db.Checks.Single(item => item.Id == idOfCheck);
+                string chen = DateTime.Now + "\r\n\r\n";
+                chen += "Bank requisites                          XXXXXXXXxx\r\n";
+                chen += "Cafe requisites                          XXXXXXXXxx\r\n";
+                chen += "Book name                                " + _db.Books.Find(check.Book_Id).Name + "\r\n";
+                chen += "Fio of reader                            " + _db.Readers.Find(check.Reader_Id).FIO + "\r\n";
+                chen += "Date                                     " + check.Date + "\r\n";
+                fileSave.Write(chen);
+                fileSave.Close();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var textFromCB = CBChooseSort.Text.ToLower();
+            if (textFromCB == "name")
+            {
+                dataGridBooks.DataSource = _db.Books.OrderBy(item => item.Name).ToList();
+            }
+            if (textFromCB == "author")
+            {
+                dataGridBooks.DataSource = _db.Books.OrderBy(item => item.Author).ToList();
+            }
+            if (textFromCB == "publishing")
+            {
+                dataGridBooks.DataSource = _db.Books.OrderBy(item => item.Publishing).ToList();
+            }
+            if (textFromCB == "year")
+            {
+                dataGridBooks.DataSource = _db.Books.OrderBy(item => item.Year).ToList();
+            }
+            if (textFromCB == "amount")
+            {
+                dataGridBooks.DataSource = _db.Books.OrderBy(item => item.Amount).ToList();
+            }
+            if (textFromCB == "price")
+            {
+                dataGridBooks.DataSource = _db.Books.OrderBy(item => item.Price).ToList();
+            }
+        }
+
+        private void ButSortAuthors_Click(object sender, EventArgs e)
+        {
+            var textFromCb = CBChooseSortAuthors.Text.ToLower();
+            if (textFromCb == "fio")
+            {
+                dataGridAuthors.DataSource = _db.Authors.OrderBy(item => item.FIO).ToList();
+            }
+            if (textFromCb == "year")
+            {
+                dataGridAuthors.DataSource = _db.Authors.OrderBy(item => item.FIO).ToList();
+            }
+        }
+
+        private void ButSortReaders_Click(object sender, EventArgs e)
+        {
+            var textFromCb = CBChooseSortReaders.Text.ToLower();
+            if (textFromCb == "fio")
+            {
+                dataGridReaders.DataSource = _db.Readers.OrderBy(item => item.FIO).ToList();
+            }
+            if (textFromCb == "address")
+            {
+                dataGridReaders.DataSource = _db.Readers.OrderBy(item => item.Address).ToList();
+            }
+            if (textFromCb == "telephone")
+            {
+                dataGridReaders.DataSource = _db.Readers.OrderBy(item => item.Telephone).ToList();
+            }
+        }
+
+        private void ButSortChecks_Click(object sender, EventArgs e)
+        {
+            dataGridChecks.DataSource = _db.Checks.OrderBy(item => item.Date).ToList();
+        }
+
+        
     }
 }
+
+
+
+
+
+
+
+
+//private void MenuDishNameBNT_Click(object sender, EventArgs e)
+//{
+//    MainGrid.DataSource = null;
+//    MainGrid.Refresh();
+//    try
+//    {
+//        var c = _db.Menu.SqlQuery("SELECT * FROM Menu WHERE DishName LIKE '%" + MenuDishNameTB.Text + "%'");
+//        MainGrid.DataSource = c.ToList();
+//    }
+//    catch (Exception ex)
+//    {
+//        MessageBox.Show(ex.Message);
+//    }
+//}

@@ -1,6 +1,6 @@
 ﻿namespace CourseProject.Forms.BookForms
 {
-    partial class EditAuthor
+    partial class EditBook
     {
         /// <summary>
         /// Required designer variable.
@@ -162,6 +162,7 @@
             this.ButCancel.TabIndex = 17;
             this.ButCancel.Text = "Cancel";
             this.ButCancel.UseVisualStyleBackColor = true;
+            this.ButCancel.Click += new System.EventHandler(this.ButCancel_Click);
             // 
             // ButAddBook
             // 

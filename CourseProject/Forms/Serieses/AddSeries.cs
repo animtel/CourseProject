@@ -19,6 +19,7 @@ namespace CourseProject.Forms.Serieses
         internal protected bool flag;
         private List<string> _AuthorInf;
         private List<string> _BookInf;
+        private List<string> _BookInf1;
 
         public AddSeries(MainForm mainform)
         {
@@ -26,7 +27,7 @@ namespace CourseProject.Forms.Serieses
             GetInfo(mainform);
             CBAuthor.DataSource = _AuthorInf;
             CBFirstName.DataSource = _BookInf;
-            CBLastName.DataSource = _BookInf;
+            CBLastName.DataSource = _BookInf1;
             flag = false;
         }
 
@@ -38,13 +39,16 @@ namespace CourseProject.Forms.Serieses
                 _AuthorInf.Add(item.Id + " " + item.FIO);
             }
             _BookInf = new List<string>();
+            _BookInf1 = new List<string>();
             foreach (var item in mainform._db.Books.ToList())
             {
                 _BookInf.Add(item.Id + " \"" + item.Name + "\" " + item.Year.ToString());
+                _BookInf1.Add(item.Id + " \"" + item.Name + "\" " + item.Year.ToString());
             }
         }
 
-        private void ButAddSeries_Click(object sender, EventArgs e)
+     
+        private void ButAddSeries_Click_1(object sender, EventArgs e)
         {
             Name = TBName.Text;
             FirstBookID = Int32.Parse(CBFirstName.Text.Split(' ')[0]);
@@ -54,9 +58,10 @@ namespace CourseProject.Forms.Serieses
             Close();
         }
 
-        private void ButCancel_Click(object sender, EventArgs e)
+        private void ButCancel_Click_1(object sender, EventArgs e)
         {
             Close();
+
         }
     }
 }

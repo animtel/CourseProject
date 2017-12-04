@@ -65,6 +65,7 @@
             this.ButCancel.TabIndex = 1;
             this.ButCancel.Text = "Cancel";
             this.ButCancel.UseVisualStyleBackColor = true;
+            this.ButCancel.Click += new System.EventHandler(this.ButCancel_Click);
             // 
             // TBNameOfBook
             // 

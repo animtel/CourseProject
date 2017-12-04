@@ -14,7 +14,6 @@ namespace CourseProject.Models
             //Checks = new HashSet<Checks>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Required]

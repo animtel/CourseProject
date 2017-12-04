@@ -40,12 +40,19 @@ namespace CourseProject.Forms.Serieses
                 FirstBook = Int32.Parse(TBFirstName.Text);
                 LastBook = Int32.Parse(TBLastName.Text);
                 Author = Int32.Parse(TBAuthor.Text);
-                flag = false;
+                flag = true;
+                Close();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error");
             }
+        }
+
+        private void ButCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

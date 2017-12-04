@@ -91,6 +91,7 @@
             this.ButAddSeries.TabIndex = 8;
             this.ButAddSeries.Text = "Enter";
             this.ButAddSeries.UseVisualStyleBackColor = true;
+            this.ButAddSeries.Click += new System.EventHandler(this.ButAddSeries_Click_1);
             // 
             // ButCancel
             // 
@@ -100,6 +101,7 @@
             this.ButCancel.TabIndex = 9;
             this.ButCancel.Text = "Cancel";
             this.ButCancel.UseVisualStyleBackColor = true;
+            this.ButCancel.Click += new System.EventHandler(this.ButCancel_Click_1);
             // 
             // CBFirstName
             // 
