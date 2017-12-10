@@ -1,27 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CourseProject.Models;
-using CourseProject.Forms;
 using CourseProject.Forms.AuthorForms;
 using CourseProject.Forms.BookForms;
 using CourseProject.Forms.ReaderForms;
 using CourseProject.Forms.Serieses;
-using System.Data.SqlClient;
-using Dapper;
+using CourseProject.Forms.FreeSQLRequestForm;
+using CourseProject.Forms.CheckForms;
 
 namespace CourseProject
 {
     public partial class MainForm : Form
     {
         public LibraryDbContext _db;
-        private string _connectionString = @"Data Source=DESKTOP-TDLQB1A\MSSQL2016DEV;Initial Catalog=bookstoredb;Integrated Security=True";
+        
+
 
         public MainForm()
         {
@@ -31,7 +27,8 @@ namespace CourseProject
             dataGridBooks.DataSource = _db.Books.ToList();
             dataGridReaders.DataSource = _db.Readers.ToList();
             dataGridSerieses.DataSource = _db.BookSerieses.ToList();
-        }
+            dataGridChecks.DataSource = _db.Checks.ToList();
+        } // ctor of main form
 
         #region BooksOperation
 
@@ -229,15 +226,74 @@ namespace CourseProject
 
         private void ButDeleteReader_Click(object sender, EventArgs e)
         {
-            int idOfReader = Int32.Parse(dataGridReaders.CurrentRow.Cells[0].Value.ToString());
-            _db.Readers.Remove(_db.Readers.Single(item => item.Id == idOfReader));
-            _db.SaveChanges();
-            dataGridReaders.DataSource = _db.Readers.ToList();
-
+            int? idOfReader = Int32.Parse(dataGridReaders.CurrentRow.Cells[0].Value.ToString());
+            var idIsNull = idOfReader == null;
+            if (idIsNull)
+            {
+                MessageBox.Show("Id of reader is null!");
+            }
+            else
+            {
+                try
+                {
+                    _db.Readers.Remove(_db.Readers.Single(item => item.Id == idOfReader));
+                    _db.SaveChanges();
+                    dataGridReaders.DataSource = _db.Readers.ToList();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("This reader is binding with book. :(");
+                }
+            }
         }
         #endregion
 
         #region ChecksOperation
+        private void ButAddCheck_Click(object sender, EventArgs e)
+        {
+            AddCheck new_check = new AddCheck(this);
+            new_check.ShowDialog();
+            if (new_check.flag)
+            {
+                try
+                {
+                    var check = new Checks()
+                    {
+                        Book_Id = new_check.BookID,
+                        Reader_Id = new_check.ReaderID,
+                        Date = DateTime.Now.ToString()
+                    };
+                    _db.Checks.Add(check);
+                    _db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void ButEditCheck_Click(object sender, EventArgs e)
+        {
+            int id = Int32.Parse(dataGridChecks.CurrentRow.Cells[0].Value.ToString());
+
+            Checks currentCheck = _db.Checks.Single(item => item.Id == id);
+            EditCheck editCheck = new EditCheck(this, currentCheck);
+            editCheck.ShowDialog();
+            if (editCheck.flag)
+            {
+                try
+                {
+                    currentCheck.Book_Id = editCheck.BookID;
+                    currentCheck.Reader_Id = editCheck.ReaderID;
+                    _db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
 
         private void ButDelteCheck_Click(object sender, EventArgs e)
         {
@@ -317,28 +373,8 @@ namespace CourseProject
         }
         #endregion
 
-        private void BTSaveCheck_Click(object sender, EventArgs e)
-        {
-            saveCheck.Filter = "TXT Text|*.txt";
-            saveCheck.Title = "Save a report file";
-            saveCheck.ShowDialog();
-            if (saveCheck.FileName != "")
-            {
-                System.IO.StreamWriter fileSave = new System.IO.StreamWriter(saveCheck.FileName);
-                int idOfCheck = Int32.Parse(dataGridChecks.CurrentRow.Cells[0].Value.ToString());
-                Checks check = _db.Checks.Single(item => item.Id == idOfCheck);
-                string chen = DateTime.Now + "\r\n\r\n";
-                chen += "Bank requisites                          XXXXXXXXxx\r\n";
-                chen += "Cafe requisites                          XXXXXXXXxx\r\n";
-                chen += "Book name                                " + _db.Books.Find(check.Book_Id).Name + "\r\n";
-                chen += "Fio of reader                            " + _db.Readers.Find(check.Reader_Id).FIO + "\r\n";
-                chen += "Date                                     " + check.Date + "\r\n";
-                fileSave.Write(chen);
-                fileSave.Close();
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        #region Sorts
+        private void button1_Click(object sender, EventArgs e) // Books Sort Button
         {
             var textFromCB = CBChooseSort.Text.ToLower();
             if (textFromCB == "name")
@@ -401,29 +437,208 @@ namespace CourseProject
         {
             dataGridChecks.DataSource = _db.Checks.OrderBy(item => item.Date).ToList();
         }
+        #endregion
 
-        
+        #region Filters(Books(year, price), Author(year))
+
+        private void ButBooksYearFilter_Click(object sender, EventArgs e)
+        {
+            int year;
+            if (Int32.TryParse(TBBooksYearFilter.Text, out year))
+            {
+                try
+                {
+                    if (CBBooksYearFilter.Text.Equals(">="))
+                    {
+                        dataGridBooks.DataSource = _db.Books.Where(item => item.Year >= year).ToList();
+                    }
+                    if (CBBooksYearFilter.Text.Equals("<="))
+                    {
+                        dataGridBooks.DataSource = _db.Books.Where(item => item.Year <= year).ToList();
+                    }
+                    if (CBBooksYearFilter.Text.Equals("="))
+                    {
+                        dataGridBooks.DataSource = _db.Books.Where(item => item.Year == year).ToList();
+                    }
+                    if (CBBooksYearFilter.Text.Equals("<>"))
+                    {
+                        dataGridBooks.DataSource = _db.Books.Where(item => item.Year != year).ToList();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void ButBooksPriceFilter_Click(object sender, EventArgs e)
+        {
+            int price;
+            if (Int32.TryParse(TBBooksPriceFilter.Text, out price))
+            {
+                try
+                {
+
+                    if (CBBooksPriceFilter.Text.Equals(">="))
+                    {
+                        dataGridBooks.DataSource = _db.Books.Where(item => Int32.Parse(item.Price) >= price).ToList();
+                    }
+                    if (CBBooksPriceFilter.Text.Equals("<="))
+                    {
+                        dataGridBooks.DataSource = _db.Books.Where(item => Int32.Parse(item.Price) <= price).ToList();
+                    }
+                    if (CBBooksPriceFilter.Text.Equals("="))
+                    {
+                        dataGridBooks.DataSource = _db.Books.Where(item => Int32.Parse(item.Price) == price).ToList();
+                    }
+                    if (CBBooksPriceFilter.Text.Equals("<>"))
+                    {
+                        dataGridBooks.DataSource = _db.Books.Where(item => Int32.Parse(item.Price) != price).ToList();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void ButAuthorsYearFilter_Click(object sender, EventArgs e)
+        {
+            int year;
+            if (Int32.TryParse(TBAuthorsYearFilter.Text, out year))
+            {
+                try
+                {
+                    if (CBAuthorsYearFilter.Text.Equals(">="))
+                    {
+                        dataGridAuthors.DataSource = _db.Authors.Where(item => item.Year >= year).ToList();
+                    }
+                    if (CBAuthorsYearFilter.Text.Equals("<="))
+                    {
+                        dataGridAuthors.DataSource = _db.Authors.Where(item => item.Year <= year).ToList();
+                    }
+                    if (CBAuthorsYearFilter.Text.Equals("="))
+                    {
+                        dataGridAuthors.DataSource = _db.Authors.Where(item => item.Year == year).ToList();
+                    }
+                    if (CBAuthorsYearFilter.Text.Equals("<>"))
+                    {
+                        dataGridAuthors.DataSource = _db.Authors.Where(item => item.Year != year).ToList();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+        #endregion
+
+        #region ButtonsWhichShowAllData
+        private void ButAllBooks_Click(object sender, EventArgs e)
+        {
+            dataGridBooks.DataSource = _db.Books.ToList();
+        }
+
+        private void ButAllAuthors_Click(object sender, EventArgs e)
+        {
+            dataGridAuthors.DataSource = _db.Authors.ToList();
+        }
+
+        private void ButAllReaders_Click(object sender, EventArgs e)
+        {
+            dataGridReaders.DataSource = _db.Readers.ToList();
+        }
+
+        private void ButAllChecks_Click(object sender, EventArgs e)
+        {
+            dataGridChecks.DataSource = _db.Checks.ToList();
+        }
+
+        private void ButAllSerieses_Click(object sender, EventArgs e)
+        {
+            dataGridSerieses.DataSource = _db.BookSerieses.ToList();
+        }
+        #endregion
+
+        #region SearchButtons
+        private void ButBooksNameSearch_Click(object sender, EventArgs e)
+        {
+            dataGridBooks.DataSource = null;
+            dataGridBooks.Refresh();
+            try
+            {
+                var allBooksWhichWeSerched = _db.Books.SqlQuery("SELECT * FROM Books WHERE Name LIKE'%" + TBBooksNameSearch.Text + "%'");
+                dataGridBooks.DataSource = allBooksWhichWeSerched.ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButAuthorFIOSearch_Click(object sender, EventArgs e)
+        {
+            dataGridAuthors.DataSource = null;
+            dataGridAuthors.Refresh();
+            try
+            {
+                var c = _db.Authors.SqlQuery("SELECT * FROM Authors WHERE FIO LIKE'%" + TBAuthorFIOSearch.Text + "%'");
+                dataGridAuthors.DataSource = c.ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        private void ButSqlReq_Click(object sender, EventArgs e)
+        {
+            FreeSQLRequests freeSQLRequests = new FreeSQLRequests();
+            freeSQLRequests.Show();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the BTSaveCheck control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void BTSaveCheck_Click(object sender, EventArgs e)
+        {
+            saveCheck.Filter = "TXT Text|*.txt";
+            saveCheck.Title = "Save a report file";
+            saveCheck.ShowDialog();
+            if (saveCheck.FileName != "")
+            {
+                System.IO.StreamWriter fileSave = new System.IO.StreamWriter(saveCheck.FileName);
+                int idOfCheck = Int32.Parse(dataGridChecks.CurrentRow.Cells[0].Value.ToString());
+                Checks check = _db.Checks.Single(item => item.Id == idOfCheck);
+                string chen = DateTime.Now + "\r\n\r\n";
+                chen += "Bank requisites                          XXXXXXXXxx\r\n";
+                chen += "Cafe requisites                          XXXXXXXXxx\r\n";
+                chen += "Book name                                " + _db.Books.Find(check.Book_Id).Name + "\r\n";
+                chen += "Fio of reader                            " + _db.Readers.Find(check.Reader_Id).FIO + "\r\n";
+                chen += "Date                                     " + check.Date + "\r\n";
+                fileSave.Write(chen);
+                fileSave.Close();
+            }
+        }
+
+        /// <summary>
+        /// Handles the 1 event of the ButTheMostExpensiveBook_Click control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void ButTheMostExpensiveBook_Click_1(object sender, EventArgs e)
+        {
+            var book = _db.Books.ToList().OrderBy(item => item.Price).Last();
+            dataGridBooks.DataSource = new List<Books>() { book };
+        }
+
     }
 }
 
 
-
-
-
-
-
-
-//private void MenuDishNameBNT_Click(object sender, EventArgs e)
-//{
-//    MainGrid.DataSource = null;
-//    MainGrid.Refresh();
-//    try
-//    {
-//        var c = _db.Menu.SqlQuery("SELECT * FROM Menu WHERE DishName LIKE '%" + MenuDishNameTB.Text + "%'");
-//        MainGrid.DataSource = c.ToList();
-//    }
-//    catch (Exception ex)
-//    {
-//        MessageBox.Show(ex.Message);
-//    }
-//}

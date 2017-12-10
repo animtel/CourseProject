@@ -10,9 +10,8 @@ using System.Windows.Forms;
 
 namespace CourseProject.Forms.Serieses
 {
-    public partial class AddSeries : Form //TODO!
+    public partial class AddSeries : Form
     {
-        internal protected string Name;
         internal protected int FirstBookID;
         internal protected int LastBookID;
         internal protected int AuthorID;

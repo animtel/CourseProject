@@ -14,7 +14,6 @@ namespace CourseProject.Forms.Serieses
     public partial class EditSeries : Form
     {
         MainForm _mainForm;
-        internal protected string Name;
         internal protected int FirstBook;
         internal protected int LastBook;
         internal protected int Author;

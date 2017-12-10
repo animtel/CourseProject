@@ -14,7 +14,6 @@ namespace CourseProject.Forms.BookForms
     {
         MainForm _mainForm;
         internal protected int Id;
-        internal protected string Name;
         internal protected string Author;
         internal protected string Publishing;
         internal protected string Year;
@@ -51,6 +50,7 @@ namespace CourseProject.Forms.BookForms
             {
                 Serieses.Add(item.Id + " " + item.Name);
             }
+            Serieses.Add("Haven't series");
             return Serieses;
         }
 
@@ -62,6 +62,10 @@ namespace CourseProject.Forms.BookForms
                 Author = CBAuthors.Text.Split(' ')[0];
                 Publishing = TBPublishingBook.Text;
                 Year = TBYear.Text;
+                if (Int32.Parse(Year) >= DateTime.Now.Year || Int32.Parse(Year) < 0)
+                {
+                    throw new Exception();
+                }
                 Amount = Int32.Parse(TBAmountBook.Value.ToString());
                 Price = TBPriceBook.Text;
                 Serieses = CBSeriesBook.Text.Split(' ')[0];

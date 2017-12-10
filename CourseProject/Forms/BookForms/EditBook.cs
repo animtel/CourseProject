@@ -15,7 +15,6 @@ namespace CourseProject.Forms.BookForms
     {
         MainForm _mainForm;
         internal protected int Id;
-        internal protected string Name;
         internal protected string Author;
         internal protected string Publishing;
         internal protected string Year;

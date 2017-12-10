@@ -32,12 +32,19 @@ namespace CourseProject.Forms.AuthorForms
             {
                 Fio = TBFIOAuthor.Text;
                 Year = Int32.Parse(TBYearAuthor.Text);
-                flag = true;
-                Close();
+                if (Year.ToString().Length <= 4 && Year > 0 && Year < DateTime.Now.Year)
+                {
+                    flag = true;
+                    Close();
+                }
+                else
+                {
+                    throw new Exception();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error!");
+                MessageBox.Show("Incorrectly entered year!");
             }
         }
 
